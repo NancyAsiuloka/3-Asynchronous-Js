@@ -21,6 +21,7 @@ const writeFilePro = (file, data) => {
   });
 };
 
+/*
 readFilePro(`${__dirname}/dog.txt`)
   .then((data) => {
     console.log(`Breed: ${data}`);
@@ -37,3 +38,4 @@ readFilePro(`${__dirname}/dog.txt`)
   .catch((err) => {
     console.log(err);
   });
+  */
