@@ -40,8 +40,11 @@ const getDogPic = async () => {
   return '2: READY!';
 };
 console.log('1: will get dog pics!');
-getDogPic();
-console.log('3: Done getting dog pics!');
+getDogPic().then(x => {
+     console.log(x);
+     console.log('3: Done getting dog pics!');
+});
+
 
 /*
 readFilePro(`${__dirname}/dog.txt`)
@@ -51,10 +54,12 @@ readFilePro(`${__dirname}/dog.txt`)
     return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
   })
   .then((res) => {
+    // returning the dog breeds url
     console.log(res.body.message);
     return writeFilePro('dog-img.txt', res.body.message);
   })
   .then(() => {
+    // saving the dog breed url to a new file
     console.log('Random dog image saved to file');
   })
   .catch((err) => {
