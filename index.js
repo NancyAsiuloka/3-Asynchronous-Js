@@ -23,29 +23,25 @@ const writeFilePro = (file, data) => {
 
 // Using asnyc/await
 const getDogPic = async () => {
-    try{
+  try {
     const data = await readFilePro(`${__dirname}/dog.txt`);
     console.log(`Breed: ${data}`);
 
-    const res = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    const res = await superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
     console.log(res.body.message);
 
     await writeFilePro('dog-img.txt', res.body.message);
     console.log('Random dog image saved to file');
- } catch(err){
+  } catch (err) {
     console.log(err);
- }
+  }
+  return '2: READY!';
 };
-
+console.log('1: will get dog pics!');
 getDogPic();
-
-
-
-
-
-
-
-
+console.log('3: Done getting dog pics!');
 
 /*
 readFilePro(`${__dirname}/dog.txt`)
