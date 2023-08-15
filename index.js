@@ -43,9 +43,6 @@ getDogPic();
 
 
 
-
-
-
 /*
 readFilePro(`${__dirname}/dog.txt`)
   .then((data) => {
