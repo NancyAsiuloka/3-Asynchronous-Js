@@ -21,6 +21,19 @@ const writeFilePro = (file, data) => {
   });
 };
 
+// Using asnyc/await
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 readFilePro(`${__dirname}/dog.txt`)
   .then((data) => {
