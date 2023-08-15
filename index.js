@@ -22,7 +22,9 @@ const writeFilePro = (file, data) => {
 };
 
 // Using asnyc/await
-
+const getDogPic = async () => {
+    await readFilePro(`${__dirname}/dog.txt`);
+}
 
 
 
