@@ -21,7 +21,45 @@ const writeFilePro = (file, data) => {
   });
 };
 
+// how to run many promises at the same time
+// getting 3 random dog images
+
+const getDogPic = async () => {
+    try {
+      const data = await readFilePro(`${__dirname}/dogg.txt`);
+      console.log(`Breed: ${data}`);
+
+      const res = await superagent.get(
+        `https://dog.ceo/api/breed/${data}/images/random`
+      );
+      console.log(res.body.message);
+
+      await writeFilePro('dog-img.txt', res.body.message);
+      console.log('Random dog image saved to file');
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+    return '2: READY!';
+  };
+
+  (async() => {
+      try {
+          console.log('1: will get dog pics!');
+          const x = await getDogPic();
+          console.log(x);
+          console.log('3: Done getting dog pics!');
+      } catch(err){
+          console.log('ERROR');
+      }
+  })();
+
+
+
+
+
 // Using asnyc/await
+/*
 const getDogPic = async () => {
   try {
     const data = await readFilePro(`${__dirname}/dogg.txt`);
@@ -51,6 +89,8 @@ const getDogPic = async () => {
         console.log('ERROR');
     }
 })();
+*/
+
 
 /*
 console.log('1: will get dog pics!');
