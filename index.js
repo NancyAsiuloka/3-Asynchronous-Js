@@ -25,38 +25,46 @@ const writeFilePro = (file, data) => {
 // getting 3 random dog images
 
 const getDogPic = async () => {
-    try {
-      const data = await readFilePro(`${__dirname}/dogg.txt`);
-      console.log(`Breed: ${data}`);
+  try {
+    const data = await readFilePro(`${__dirname}/dog.txt`);
+    console.log(`Breed: ${data}`);
 
-      const res = await superagent.get(
-        `https://dog.ceo/api/breed/${data}/images/random`
-      );
-      console.log(res.body.message);
+    const res1Pro = superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const res2Pro = superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const res3Pro = superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    const all = await Promise.all([res1Pro, res2Pro, res3Pro]);
+    // create an array that only contains body.message
+        const imgs = all.map(el => el.body.message);
+    console.log(imgs);
 
-      await writeFilePro('dog-img.txt', res.body.message);
-      console.log('Random dog image saved to file');
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-    return '2: READY!';
-  };
+    // used to read the results
+    // console.log(res.body.message);
 
-  (async() => {
-      try {
-          console.log('1: will get dog pics!');
-          const x = await getDogPic();
-          console.log(x);
-          console.log('3: Done getting dog pics!');
-      } catch(err){
-          console.log('ERROR');
-      }
-  })();
+    await writeFilePro('dog-img.txt', imgs.join('\n'));
+    console.log('Random dog image saved to file');
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+  return '2: READY!';
+};
 
-
-
-
+(async () => {
+  try {
+    console.log('1: will get dog pics!');
+    const x = await getDogPic();
+    console.log(x);
+    console.log('3: Done getting dog pics!');
+  } catch (err) {
+    console.log('ERROR');
+  }
+})();
 
 // Using asnyc/await
 /*
@@ -91,7 +99,6 @@ const getDogPic = async () => {
 })();
 */
 
-
 /*
 console.log('1: will get dog pics!');
 getDogPic().then(x => {
@@ -101,7 +108,6 @@ getDogPic().then(x => {
     console.log('ERROR');
 });
 */
-
 
 /*
 readFilePro(`${__dirname}/dog.txt`)
